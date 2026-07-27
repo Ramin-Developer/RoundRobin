@@ -40,5 +40,10 @@ added repository-level build conventions, and expanded automated test coverage.
 - `dotnet test`: **30 passed, 0 failed**.
 - `dotnet format` (C# projects): clean.
 
+## Post-upgrade CI fix
+- **Symptom:** `CI / build-and-test` failed in ~16s on `ubuntu-latest` while all steps passed locally on Windows.
+- **Root cause:** `.gitattributes` used `* text=auto`, so `.cs` files checked out as CRLF on Windows but LF on Linux. The solution `.editorconfig` enforces `end_of_line = crlf` for `[*.cs]`, so `dotnet format --verify-no-changes` failed only on the Linux runner.
+- **Fix:** Added `*.cs text eol=crlf` to `.gitattributes` so C# files check out with CRLF on all platforms, matching the enforced convention.
+
 ## Deferred / Optional Follow-ups
 - Consider evaluating the CA analyzer hints surfaced at `--severity info` (CA1822, CA1859) as a future cleanup.

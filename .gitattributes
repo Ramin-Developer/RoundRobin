@@ -4,6 +4,15 @@
 * text=auto
 
 ###############################################################################
+# Force CRLF for C# source files.
+#
+# The solution .editorconfig enforces `end_of_line = crlf` for [*.cs]. Without
+# this, `text=auto` checks files out as LF on Linux (CI) and CRLF on Windows,
+# causing `dotnet format --verify-no-changes` to fail only on the Linux runner.
+###############################################################################
+*.cs text eol=crlf
+
+###############################################################################
 # Set default behavior for command prompt diff.
 #
 # This is need for earlier builds of msysgit that does not have it on by
