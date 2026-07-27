@@ -1,41 +1,40 @@
 namespace ChessTournament.Test;
 
-[TestFixture]
 public class AdminTests
 {
-    [TestCase(4), TestCase(6), TestCase(8), TestCase(10), TestCase(12), TestCase(14)]
-    [TestCase(16), TestCase(18), TestCase(20), TestCase(22), TestCase(24)]
-    public void ShouldGenerateCorrectNoOfActualRounds(int noOfPlayers)
+    private static Admin Simulate(int noOfPlayers)
     {
-        // Arrange
-        var noOfDesiredRounds = noOfPlayers - 1;
-        var problemDesc = new ProblemDesc(noOfPlayers, noOfDesiredRounds);
-        var expected = noOfDesiredRounds;
-        var sut = new Admin(problemDesc);
-
-        // Act
-        sut.Simulate();
-        var actual = sut.NoOfActualRounds;
-
-        // Assert
-        Assert.That(actual, Is.EqualTo(expected));
+        var admin = new Admin(new ProblemDesc(noOfPlayers, noOfPlayers - 1));
+        admin.Simulate();
+        return admin;
     }
 
-    [TestCase(4)]
-    public void Should_generate_correct_rounds(int noOfPlayers)
+    [Theory]
+    [MemberData(nameof(PlayerCounts.FullRange), MemberType = typeof(PlayerCounts))]
+    public void Simulate_GeneratesRequestedNumberOfRounds(int noOfPlayers)
     {
-        // Arrange
-        var noOfDesiredRounds = noOfPlayers - 1;
-        var problemDesc = new ProblemDesc(noOfPlayers, noOfDesiredRounds);
-        var sut = new Admin(problemDesc);
+        var sut = Simulate(noOfPlayers);
+
+        Assert.Equal(noOfPlayers - 1, sut.NoOfActualRounds);
+    }
+
+    [Theory]
+    [MemberData(nameof(PlayerCounts.Sample), MemberType = typeof(PlayerCounts))]
+    public void Simulate_FillsEveryMatchSlotAcrossAllRounds(int noOfPlayers)
+    {
+        var sut = Simulate(noOfPlayers);
         var expectedMatchesPerRound = noOfPlayers / 2;
 
-        // Act
-        sut.Simulate();
-        var actual = sut.Rounds;
+        Assert.NotEmpty(sut.Rounds);
+        Assert.Equal(sut.Rounds.Count * expectedMatchesPerRound, sut.NoOfMatchesPlayed);
+    }
 
-        // Assert: rounds are generated and every match slot is filled across all rounds
-        Assert.That(actual, Is.Not.Empty);
-        Assert.That(sut.NoOfMatchesPlayed, Is.EqualTo(actual.Count * expectedMatchesPerRound));
+    [Fact]
+    public void ToString_ReportsDesiredRoundsMet_AfterSuccessfulSimulation()
+    {
+        var sut = Simulate(4);
+
+        Assert.True(sut.IsDesiredNoOfRoundsMet);
+        Assert.Contains("Met", sut.ToString());
     }
 }
