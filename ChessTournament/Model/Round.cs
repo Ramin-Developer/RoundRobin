@@ -1,28 +1,17 @@
 namespace ChessTournament.Model;
 
-public class Round
+public class Round(Interfaces.IProblemDesc problemDesc)
 {
-    /************************************************ Constructor ************************************************/
-    public Round(Interfaces.IProblemDesc problemDesc)
-    {
-        Players = problemDesc.Players.ToList();
-        NoOfPlayers = Players.Count;
-        NoOfMatchesPerRound = problemDesc.NoOfMatchesPerRound;
-        AllMatches = problemDesc.AllMatches;
-    }
-
     /********************************************** Class Interface **********************************************/
+    public int NoOfPlayers { get; } = problemDesc.Players.Count;
+
+    public int NoOfMatchesPerRound { get; } = problemDesc.NoOfMatchesPerRound;
+
     internal int Cost { get; set; }
-
-    public int NoOfPlayers { get; }
-
-    public int NoOfMatchesPerRound { get; }
 
     internal int Count => RoundMatches.Count;
 
     internal bool IsEmpty => RoundMatches.Count == 0;
-
-    private List<Match> RoundMatches { get; set; } = [];
 
     internal void Setup()
     {
@@ -34,13 +23,16 @@ public class Round
     public override string ToString() => Display();
 
     /*********************************************** Private Fields **********************************************/
-    private List<Player> Players { get; }
+    private const int IdStep = Utility.IdStep;
+
+    private List<Match> RoundMatches { get; set; } = [];
+
+    private List<Player> Players { get; } = problemDesc.Players.ToList();
+
+    private IEnumerable<HashSet<Match>> AllMatches { get; } = problemDesc.AllMatches;
 
     private int RoundCost => RoundMatches.Sum(item => Math.Abs(item.SndPlayerRank - item.FstPlayerRank));
 
-    private IEnumerable<HashSet<Match>> AllMatches { get; }
-
-    /*********************************************** Private Fields **********************************************/
     private IEnumerable<Match> SetupRound()
     {
         var matches = new List<Match>();
@@ -102,6 +94,4 @@ public class Round
     }
 
     private Player? FindFreePlayer() => Players.FirstOrDefault(player => !player.IsBusy);
-
-    private const int IdStep = Utility.IdStep;
 }

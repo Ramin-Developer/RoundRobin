@@ -1,19 +1,13 @@
 namespace ChessTournament.Model;
 
-public class Player
+public class Player(int id, int rank)
 {
-    /************************************************ Constructor ************************************************/
-    public Player(int id, int rank)
-    {
-        Id = id;
-        Rank = rank;
-        IsBusy = false;
-    }
-
     /********************************************** Class Interface **********************************************/
+    public int Compare(Player? x, Player? y) => x!.Id > y!.Id ? 1 : 0;
+
     internal int Id
     {
-        get { return _id; }
+        get => _id;
 
         set
         {
@@ -26,7 +20,7 @@ public class Player
 
     internal int Rank
     {
-        get { return _rank; }
+        get => _rank;
 
         set
         {
@@ -39,9 +33,12 @@ public class Player
 
     internal bool IsBusy { get; set; }
 
-    public int Compare(Player? x, Player? y) => x!.Id > y!.Id ? 1 : 0;
-
     /*********************************************** Private Fields **********************************************/
-    private int _id;
-    private int _rank;
+    private int _id = id is >= 0 and <= 1000000
+        ? id
+        : throw new ArgumentOutOfRangeException(nameof(id), id, "Value of Player ID is out of range!");
+
+    private int _rank = rank is >= 0 and <= 3000
+        ? rank
+        : throw new ArgumentOutOfRangeException(nameof(rank), rank, "Value of Rank is out of range!");
 }

@@ -1,36 +1,11 @@
 namespace ChessTournament.Model;
 
-public class Admin
+public class Admin(Interfaces.IProblemDesc problemDesc)
 {
-    /************************************************ Constructors ***********************************************/
-    public Admin(Interfaces.IProblemDesc problemDesc)
-    {
-        _problemDesc = problemDesc;
-        NoOfPlayers = problemDesc.NoOfPlayers;
-        MaxNoOfRounds = problemDesc.MaxNoOfRounds;
-        NoOfRoundsDesired = problemDesc.NoOfRoundsDesired;
-        NoOfMatchesPerRound = problemDesc.NoOfMatchesPerRound;
-        NoOfPossibleMatches = problemDesc.NoOfPossibleMatches;
-        OutputFile = problemDesc.OutputFile;
-
-        Players = problemDesc.Players;
-        AllMatches = problemDesc.AllMatches;
-    }
-
     /********************************************** Class Interface **********************************************/
-    internal int NoOfPlayers { get; }
+    public int NoOfMatchesPerRound { get; } = problemDesc.NoOfMatchesPerRound;
 
-    internal int NoOfRoundsDesired { get; }
-
-    internal int MaxNoOfRounds { get; }
-
-    public int NoOfMatchesPerRound { get; }
-
-    public int NoOfPossibleMatches { get; }
-
-    internal string OutputFile { get; }
-
-    internal string ScreenSummary { get; set; } = string.Empty;
+    public int NoOfPossibleMatches { get; } = problemDesc.NoOfPossibleMatches;
 
     public List<Round> Rounds { get; set; } = [];
 
@@ -41,6 +16,18 @@ public class Admin
     public int NoOfMatchesPlayed { get; set; }
 
     public int ElapsedTimeInSec { get; set; }
+
+    public IEnumerable<HashSet<Match>> AllMatches { get; } = problemDesc.AllMatches;
+
+    internal int NoOfPlayers { get; } = problemDesc.NoOfPlayers;
+
+    internal int NoOfRoundsDesired { get; } = problemDesc.NoOfRoundsDesired;
+
+    internal int MaxNoOfRounds { get; } = problemDesc.MaxNoOfRounds;
+
+    internal string OutputFile { get; } = problemDesc.OutputFile;
+
+    internal string ScreenSummary { get; set; } = string.Empty;
 
     public void Simulate()
     {
@@ -147,7 +134,7 @@ public class Admin
         var rounds = new List<Round>();
         for (var roundNo = 0; roundNo < NoOfRoundsDesired; roundNo++)
         {
-            var aRound = new Round(_problemDesc);
+            var aRound = new Round(problemDesc);
             aRound.Setup();
             if (aRound.Count != NoOfMatchesPerRound)
                 break;
@@ -160,13 +147,9 @@ public class Admin
     }
 
     /*************************************************** Private Fields ****************************************************/
-    private readonly Interfaces.IProblemDesc _problemDesc;
-
-    public IEnumerable<HashSet<Match>> AllMatches { get; }
-
     private List<Round> TriedRounds { get; set; } = [];
 
-    private HashSet<Player> Players { get; }
+    private HashSet<Player> Players { get; } = problemDesc.Players;
 
     private void ResetPlayers() => Players.ToList().ForEach(p => p.IsBusy = false);
 }
