@@ -4,7 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facet.Combinatorics {
+namespace Facet.Combinatorics
+{
     /// <summary>
     /// Variations defines a meta-collection, typically a list of lists, of all possible 
     /// ordered subsets of a particular size from the set of values.  
@@ -24,13 +25,15 @@ namespace Facet.Combinatorics {
     /// The equality of multiple inputs is not considered when generating variations.
     /// </remarks>
     /// <typeparam name="T">The type of the values within the list.</typeparam>
-    public class Variations<T> : IMetaCollection<T> {
+    public class Variations<T> : IMetaCollection<T>
+    {
         #region Constructors
 
         /// <summary>
         /// No default constructor, must provided a list of values and size.
         /// </summary>
-        protected Variations() {
+        protected Variations()
+        {
             ;
         }
 
@@ -41,7 +44,8 @@ namespace Facet.Combinatorics {
         /// </summary>
         /// <param name="values">List of values to select Variations from.</param>
         /// <param name="lowerIndex">The size of each variation set to return.</param>
-        public Variations(IList<T> values, int lowerIndex) {
+        public Variations(IList<T> values, int lowerIndex)
+        {
             Initialize(values, lowerIndex, GenerateOption.WithoutRepetition);
         }
 
@@ -52,7 +56,8 @@ namespace Facet.Combinatorics {
         /// <param name="values">List of values to select variations from.</param>
         /// <param name="lowerIndex">The size of each vatiation set to return.</param>
         /// <param name="type">Type indicates whether to use repetition in set generation.</param>
-        public Variations(IList<T> values, int lowerIndex, GenerateOption type) {
+        public Variations(IList<T> values, int lowerIndex, GenerateOption type)
+        {
             Initialize(values, lowerIndex, type);
         }
 
@@ -64,11 +69,14 @@ namespace Facet.Combinatorics {
         /// Gets an enumerator for the collection of Variations.
         /// </summary>
         /// <returns>The enumerator.</returns>
-        public IEnumerator<IList<T>> GetEnumerator() {
-            if(Type == GenerateOption.WithRepetition) {
+        public IEnumerator<IList<T>> GetEnumerator()
+        {
+            if (Type == GenerateOption.WithRepetition)
+            {
                 return new EnumeratorWithRepetition(this);
             }
-            else {
+            else
+            {
                 return new EnumeratorWithoutRepetition(this);
             }
         }
@@ -77,11 +85,14 @@ namespace Facet.Combinatorics {
         /// Gets an enumerator for the collection of Variations.
         /// </summary>
         /// <returns>The enumerator.</returns>
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-            if(Type == GenerateOption.WithRepetition) {
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            if (Type == GenerateOption.WithRepetition)
+            {
                 return new EnumeratorWithRepetition(this);
             }
-            else {
+            else
+            {
                 return new EnumeratorWithoutRepetition(this);
             }
         }
@@ -93,7 +104,8 @@ namespace Facet.Combinatorics {
         /// <summary>
         /// An enumerator for Variations when the type is set to WithRepetition.
         /// </summary>
-        public class EnumeratorWithRepetition : IEnumerator<IList<T>> {
+        public class EnumeratorWithRepetition : IEnumerator<IList<T>>
+        {
 
             #region Constructors
 
@@ -101,7 +113,8 @@ namespace Facet.Combinatorics {
             /// Construct a enumerator with the parent object.
             /// </summary>
             /// <param name="source">The source Variations object.</param>
-            public EnumeratorWithRepetition(Variations<T> source) {
+            public EnumeratorWithRepetition(Variations<T> source)
+            {
                 myParent = source;
                 Reset();
             }
@@ -113,7 +126,8 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// Resets the Variations enumerator to the first variation.  
             /// </summary>
-            public void Reset() {
+            public void Reset()
+            {
                 myCurrentList = null;
                 myListIndexes = null;
             }
@@ -127,20 +141,26 @@ namespace Facet.Combinatorics {
             /// and overflow/carrying into others just like grade-school arithemtic.  If the 
             /// finaly carry flag is set, then we would wrap around and are therefore done.
             /// </remarks>
-            public bool MoveNext() {
+            public bool MoveNext()
+            {
                 int carry = 1;
-                if(myListIndexes == null) {
+                if (myListIndexes == null)
+                {
                     myListIndexes = new List<int>();
-                    for(int i = 0; i < myParent.LowerIndex; ++i) {
+                    for (int i = 0; i < myParent.LowerIndex; ++i)
+                    {
                         myListIndexes.Add(0);
                     }
                     carry = 0;
                 }
-                else {
-                    for(int i = myListIndexes.Count - 1; i >= 0 && carry > 0; --i) {
+                else
+                {
+                    for (int i = myListIndexes.Count - 1; i >= 0 && carry > 0; --i)
+                    {
                         myListIndexes[i] += carry;
                         carry = 0;
-                        if(myListIndexes[i] >= myParent.UpperIndex) {
+                        if (myListIndexes[i] >= myParent.UpperIndex)
+                        {
                             myListIndexes[i] = 0;
                             carry = 1;
                         }
@@ -153,8 +173,10 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// The current variation
             /// </summary>
-            public IList<T> Current {
-                get {
+            public IList<T> Current
+            {
+                get
+                {
                     ComputeCurrent();
                     return myCurrentList;
                 }
@@ -163,8 +185,10 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// The current variation.
             /// </summary>
-            object System.Collections.IEnumerator.Current {
-                get {
+            object System.Collections.IEnumerator.Current
+            {
+                get
+                {
                     ComputeCurrent();
                     return myCurrentList;
                 }
@@ -173,7 +197,8 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// Cleans up non-managed resources, of which there are none used here.
             /// </summary>
-            public void Dispose() {
+            public void Dispose()
+            {
                 ;
             }
 
@@ -184,10 +209,13 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// Computes the current list based on the internal list index.
             /// </summary>
-            private void ComputeCurrent() {
-                if(myCurrentList == null) {
+            private void ComputeCurrent()
+            {
+                if (myCurrentList == null)
+                {
                     myCurrentList = new List<T>();
-                    foreach(int index in myListIndexes) {
+                    foreach (int index in myListIndexes)
+                    {
                         myCurrentList.Add(myParent.myValues[index]);
                     }
                 }
@@ -218,7 +246,8 @@ namespace Facet.Combinatorics {
         /// <summary>
         /// An enumerator for Variations when the type is set to WithoutRepetition.
         /// </summary>
-        public class EnumeratorWithoutRepetition : IEnumerator<IList<T>> {
+        public class EnumeratorWithoutRepetition : IEnumerator<IList<T>>
+        {
 
             #region Constructors
 
@@ -226,7 +255,8 @@ namespace Facet.Combinatorics {
             /// Construct a enumerator with the parent object.
             /// </summary>
             /// <param name="source">The source Variations object.</param>
-            public EnumeratorWithoutRepetition(Variations<T> source) {
+            public EnumeratorWithoutRepetition(Variations<T> source)
+            {
                 myParent = source;
                 myPermutationsEnumerator = (Permutations<int>.Enumerator)myParent.myPermutations.GetEnumerator();
             }
@@ -238,7 +268,8 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// Resets the Variations enumerator to the first variation.  
             /// </summary>
-            public void Reset() {
+            public void Reset()
+            {
                 myPermutationsEnumerator.Reset();
             }
 
@@ -246,7 +277,8 @@ namespace Facet.Combinatorics {
             /// Advances to the next variation.
             /// </summary>
             /// <returns>True if successfully moved to next variation, False if no more variations exist.</returns>
-            public bool MoveNext() {
+            public bool MoveNext()
+            {
                 bool ret = myPermutationsEnumerator.MoveNext();
                 myCurrentList = null;
                 return ret;
@@ -255,8 +287,10 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// The current variation.
             /// </summary>
-            public IList<T> Current {
-                get {
+            public IList<T> Current
+            {
+                get
+                {
                     ComputeCurrent();
                     return myCurrentList;
                 }
@@ -265,8 +299,10 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// The current variation.
             /// </summary>
-            object System.Collections.IEnumerator.Current {
-                get {
+            object System.Collections.IEnumerator.Current
+            {
+                get
+                {
                     ComputeCurrent();
                     return myCurrentList;
                 }
@@ -275,7 +311,8 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// Cleans up non-managed resources, of which there are none used here.
             /// </summary>
-            public void Dispose() {
+            public void Dispose()
+            {
                 ;
             }
 
@@ -298,23 +335,30 @@ namespace Facet.Combinatorics {
             /// Permutations:  {- 1 - - 3 2} (- is Int32.MaxValue)
             /// Generates set: {B F E}
             /// </remarks>
-            private void ComputeCurrent() {
-                if(myCurrentList == null) {
+            private void ComputeCurrent()
+            {
+                if (myCurrentList == null)
+                {
                     myCurrentList = new List<T>();
                     int index = 0;
                     IList<int> currentPermutation = (IList<int>)myPermutationsEnumerator.Current;
-                    for(int i = 0; i < myParent.LowerIndex; ++i) {
+                    for (int i = 0; i < myParent.LowerIndex; ++i)
+                    {
                         myCurrentList.Add(myParent.myValues[0]);
                     }
-                    for(int i = 0; i < currentPermutation.Count; ++i) {
+                    for (int i = 0; i < currentPermutation.Count; ++i)
+                    {
                         int position = currentPermutation[i];
-                        if(position != Int32.MaxValue) {
+                        if (position != Int32.MaxValue)
+                        {
                             myCurrentList[position] = myParent.myValues[index];
-                            if(myParent.Type == GenerateOption.WithoutRepetition) {
+                            if (myParent.Type == GenerateOption.WithoutRepetition)
+                            {
                                 ++index;
                             }
                         }
-                        else {
+                        else
+                        {
                             ++index;
                         }
                     }
@@ -353,12 +397,16 @@ namespace Facet.Combinatorics {
         /// Variations with repetitions does not behave like other meta-collections and it's
         /// count is equal to N^P, where N is the upper index and P is the lower index.
         /// </remarks>
-        public long Count {
-            get {
-                if(Type == GenerateOption.WithoutRepetition) {
+        public long Count
+        {
+            get
+            {
+                if (Type == GenerateOption.WithoutRepetition)
+                {
                     return myPermutations.Count;
                 }
-                else {
+                else
+                {
                     return (long)Math.Pow(UpperIndex, LowerIndex);
                 }
             }
@@ -367,8 +415,10 @@ namespace Facet.Combinatorics {
         /// <summary>
         /// The type of Variations set that is generated.
         /// </summary>
-        public GenerateOption Type {
-            get {
+        public GenerateOption Type
+        {
+            get
+            {
                 return myMetaCollectionType;
             }
         }
@@ -376,8 +426,10 @@ namespace Facet.Combinatorics {
         /// <summary>
         /// The upper index of the meta-collection, equal to the number of items in the initial set.
         /// </summary>
-        public int UpperIndex {
-            get {
+        public int UpperIndex
+        {
+            get
+            {
                 return myValues.Count;
             }
         }
@@ -385,8 +437,10 @@ namespace Facet.Combinatorics {
         /// <summary>
         /// The lower index of the meta-collection, equal to the number of items returned each iteration.
         /// </summary>
-        public int LowerIndex {
-            get {
+        public int LowerIndex
+        {
+            get
+            {
                 return myLowerIndex;
             }
         }
@@ -401,25 +455,31 @@ namespace Facet.Combinatorics {
         /// <param name="values">List of values to select variations from.</param>
         /// <param name="lowerIndex">The size of each variation set to return.</param>
         /// <param name="type">The type of variations set to generate.</param>
-        private void Initialize(IList<T> values, int lowerIndex, GenerateOption type) {
+        private void Initialize(IList<T> values, int lowerIndex, GenerateOption type)
+        {
             myMetaCollectionType = type;
             myLowerIndex = lowerIndex;
             myValues = new List<T>();
             myValues.AddRange(values);
-            if(type == GenerateOption.WithoutRepetition) {
-                List<int> myMap = new List<int>();
+            if (type == GenerateOption.WithoutRepetition)
+            {
+                List<int> myMap = new();
                 int index = 0;
-                for(int i = 0; i < myValues.Count; ++i) {
-                    if(i >= myValues.Count - myLowerIndex) {
+                for (int i = 0; i < myValues.Count; ++i)
+                {
+                    if (i >= myValues.Count - myLowerIndex)
+                    {
                         myMap.Add(index++);
                     }
-                    else {
+                    else
+                    {
                         myMap.Add(Int32.MaxValue);
                     }
                 }
                 myPermutations = new Permutations<int>(myMap);
             }
-            else {
+            else
+            {
                 ; // myPermutations isn't used.
             }
         }

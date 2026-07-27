@@ -4,7 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Facet.Combinatorics {
+namespace Facet.Combinatorics
+{
     /// <summary>
     /// Permutations defines a meta-collection, typically a list of lists, of all
     /// possible orderings of a set of values.  This list is enumerable and allows
@@ -28,14 +29,16 @@ namespace Facet.Combinatorics {
     /// no comparer is required and T does not need to be IComparable.
     /// </remarks>
     /// <typeparam name="T">The type of the values within the list.</typeparam>
-    public class Permutations<T> : IMetaCollection<T> {
+    public class Permutations<T> : IMetaCollection<T>
+    {
 
         #region Constructors
 
         /// <summary>
         /// No default constructor, must at least provided a list of values.
         /// </summary>
-        protected Permutations() {
+        protected Permutations()
+        {
             ;
         }
 
@@ -46,7 +49,8 @@ namespace Facet.Combinatorics {
         /// The repetition type defaults to MetaCollectionType.WithholdRepetitionSets
         /// </summary>
         /// <param name="values">List of values to permute.</param>
-        public Permutations(IList<T> values) {
+        public Permutations(IList<T> values)
+        {
             Initialize(values, GenerateOption.WithoutRepetition, null);
         }
 
@@ -57,7 +61,8 @@ namespace Facet.Combinatorics {
         /// </summary>
         /// <param name="values">List of values to permute.</param>
         /// <param name="type">The type of permutation set to calculate.</param>
-        public Permutations(IList<T> values, GenerateOption type) {
+        public Permutations(IList<T> values, GenerateOption type)
+        {
             Initialize(values, type, null);
         }
 
@@ -68,7 +73,8 @@ namespace Facet.Combinatorics {
         /// </summary>
         /// <param name="values">List of values to permute.</param>
         /// <param name="comparer">Comparer used for defining the lexigraphic order.</param>
-        public Permutations(IList<T> values, IComparer<T> comparer) {
+        public Permutations(IList<T> values, IComparer<T> comparer)
+        {
             Initialize(values, GenerateOption.WithoutRepetition, comparer);
         }
 
@@ -80,7 +86,8 @@ namespace Facet.Combinatorics {
         /// Gets an enumerator for collecting the list of permutations.
         /// </summary>
         /// <returns>The enumerator.</returns>
-        public virtual IEnumerator GetEnumerator() {
+        public virtual IEnumerator GetEnumerator()
+        {
             return new Enumerator(this);
         }
 
@@ -88,7 +95,8 @@ namespace Facet.Combinatorics {
         /// Gets an enumerator for collecting the list of permutations.
         /// </summary>
         /// <returns>The enumerator.</returns>
-        IEnumerator<IList<T>> IEnumerable<IList<T>>.GetEnumerator() {
+        IEnumerator<IList<T>> IEnumerable<IList<T>>.GetEnumerator()
+        {
             return new Enumerator(this);
         }
 
@@ -99,15 +107,17 @@ namespace Facet.Combinatorics {
         /// <summary>
         /// The enumerator that enumerates each meta-collection of the enclosing Permutations class.
         /// </summary>
-        public class Enumerator : IEnumerator<IList<T>> {
-            
+        public class Enumerator : IEnumerator<IList<T>>
+        {
+
             #region Constructors
 
             /// <summary>
             /// Construct a enumerator with the parent object.
             /// </summary>
             /// <param name="source">The source Permutations object.</param>
-            public Enumerator(Permutations<T> source) {
+            public Enumerator(Permutations<T> source)
+            {
                 myParent = source;
                 myLexicographicalOrders = new int[source.myLexicographicOrders.Length];
                 source.myLexicographicOrders.CopyTo(myLexicographicalOrders, 0);
@@ -122,7 +132,8 @@ namespace Facet.Combinatorics {
             /// Resets the permutations enumerator to the first permutation.  
             /// This will be the first lexicographically order permutation.
             /// </summary>
-            public void Reset() {
+            public void Reset()
+            {
                 myPosition = Position.BeforeFirst;
             }
 
@@ -135,17 +146,23 @@ namespace Facet.Combinatorics {
             /// Performance is further increased by using value types and removing generics, that is, the LexicographicOrder parellel array.
             /// This is a issue with the .NET CLR not optimizing as well as it could in this infrequently used scenario.
             /// </remarks>
-            public bool MoveNext() {
-                if(myPosition == Position.BeforeFirst) {
+            public bool MoveNext()
+            {
+                if (myPosition == Position.BeforeFirst)
+                {
                     myValues = new List<T>(myParent.myValues.Count);
                     myValues.AddRange(myParent.myValues);
                     Array.Sort(myLexicographicalOrders);
                     myPosition = Position.InSet;
-                } else if(myPosition == Position.InSet) {
-                    if(myValues.Count < 2) {
+                }
+                else if (myPosition == Position.InSet)
+                {
+                    if (myValues.Count < 2)
+                    {
                         myPosition = Position.AfterLast;
                     }
-                    else if(NextPermutation() == false) {
+                    else if (NextPermutation() == false)
+                    {
                         myPosition = Position.AfterLast;
                     }
                 }
@@ -155,12 +172,16 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// The current permutation.
             /// </summary>
-            public object Current {
-                get {
-                    if(myPosition == Position.InSet) {
+            public object Current
+            {
+                get
+                {
+                    if (myPosition == Position.InSet)
+                    {
                         return new List<T>(myValues);
                     }
-                    else {
+                    else
+                    {
                         throw new InvalidOperationException();
                     }
                 }
@@ -169,12 +190,16 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// The current permutation.
             /// </summary>
-            IList<T> IEnumerator<IList<T>>.Current {
-                get {
-                    if(myPosition == Position.InSet) {
+            IList<T> IEnumerator<IList<T>>.Current
+            {
+                get
+                {
+                    if (myPosition == Position.InSet)
+                    {
                         return new List<T>(myValues);
                     }
-                    else {
+                    else
+                    {
                         throw new InvalidOperationException();
                     }
                 }
@@ -183,7 +208,8 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// Cleans up non-managed resources, of which there are none used here.
             /// </summary>
-            public virtual void Dispose() {
+            public virtual void Dispose()
+            {
                 ;
             }
 
@@ -203,22 +229,27 @@ namespace Facet.Combinatorics {
             /// This uses the integers of the lexicographical order of the values so that any
             /// comparison of values are only performed during initialization. 
             /// </remarks>
-            private bool NextPermutation() {
+            private bool NextPermutation()
+            {
                 int i = myLexicographicalOrders.Length - 1;
-                while(myLexicographicalOrders[i - 1] >= myLexicographicalOrders[i]) {
+                while (myLexicographicalOrders[i - 1] >= myLexicographicalOrders[i])
+                {
                     --i;
-                    if(i == 0) {
+                    if (i == 0)
+                    {
                         return false;
                     }
                 }
                 int j = myLexicographicalOrders.Length;
-                while(myLexicographicalOrders[j - 1] <= myLexicographicalOrders[i - 1]) {
+                while (myLexicographicalOrders[j - 1] <= myLexicographicalOrders[i - 1])
+                {
                     --j;
                 }
                 Swap(i - 1, j - 1);
                 ++i;
                 j = myLexicographicalOrders.Length;
-                while(i < j) {
+                while (i < j)
+                {
                     Swap(i - 1, j - 1);
                     ++i;
                     --j;
@@ -230,7 +261,8 @@ namespace Facet.Combinatorics {
             /// Helper function for swapping two elements within the internal collection.
             /// This swaps both the lexicographical order and the values, maintaining the parallel array.
             /// </summary>
-            private void Swap(int i, int j) {
+            private void Swap(int i, int j)
+            {
                 myTemp = myValues[i];
                 myValues[i] = myValues[j];
                 myValues[j] = myTemp;
@@ -277,7 +309,8 @@ namespace Facet.Combinatorics {
             /// <summary>
             /// Internal position type for tracking enumertor position.
             /// </summary>
-            private enum Position {
+            private enum Position
+            {
                 BeforeFirst,
                 InSet,
                 AfterLast
@@ -297,8 +330,10 @@ namespace Facet.Combinatorics {
         /// I.e. count of permutations of "AAB" will be 3 instead of 6.  
         /// If type is MetaCollectionType.WithRepetition, then this is all combinations and is therefore N!, where N is the number of values.
         /// </summary>
-        public long Count {
-            get {
+        public long Count
+        {
+            get
+            {
                 return myCount;
             }
         }
@@ -306,8 +341,10 @@ namespace Facet.Combinatorics {
         /// <summary>
         /// The type of Permutations set that is generated.
         /// </summary>
-        public GenerateOption Type {
-            get {
+        public GenerateOption Type
+        {
+            get
+            {
                 return myMetaCollectionType;
             }
         }
@@ -315,8 +352,10 @@ namespace Facet.Combinatorics {
         /// <summary>
         /// The upper index of the meta-collection, equal to the number of items in the initial set.
         /// </summary>
-        public int UpperIndex {
-            get {
+        public int UpperIndex
+        {
+            get
+            {
                 return myValues.Count;
             }
         }
@@ -325,8 +364,10 @@ namespace Facet.Combinatorics {
         /// The lower index of the meta-collection, equal to the number of items returned each iteration.
         /// For Permutation, this is always equal to the UpperIndex.
         /// </summary>
-        public int LowerIndex {
-            get {
+        public int LowerIndex
+        {
+            get
+            {
                 return myValues.Count;
             }
         }
@@ -357,27 +398,35 @@ namespace Facet.Combinatorics {
         /// Input array:          {A A B C D E E}
         /// Lexicograhpic Orders: {1 1 2 3 4 5 5}
         /// </remarks>
-        private void Initialize(IList<T> values, GenerateOption type, IComparer<T> comparer) {
+        private void Initialize(IList<T> values, GenerateOption type, IComparer<T> comparer)
+        {
             myMetaCollectionType = type;
             myValues = new List<T>(values.Count);
             myValues.AddRange(values);
             myLexicographicOrders = new int[values.Count];
-            if(type == GenerateOption.WithRepetition) {
-                for(int i = 0; i < myLexicographicOrders.Length; ++i) {
+            if (type == GenerateOption.WithRepetition)
+            {
+                for (int i = 0; i < myLexicographicOrders.Length; ++i)
+                {
                     myLexicographicOrders[i] = i;
                 }
             }
-            else {
-                if(comparer == null) {
+            else
+            {
+                if (comparer == null)
+                {
                     comparer = new SelfComparer<T>();
                 }
                 myValues.Sort(comparer);
                 int j = 1;
-                if(myLexicographicOrders.Length > 0) {
+                if (myLexicographicOrders.Length > 0)
+                {
                     myLexicographicOrders[0] = j;
                 }
-                for(int i = 1; i < myLexicographicOrders.Length; ++i) {
-                    if(comparer.Compare(myValues[i - 1], myValues[i]) != 0) {
+                for (int i = 1; i < myLexicographicOrders.Length; ++i)
+                {
+                    if (comparer.Compare(myValues[i - 1], myValues[i]) != 0)
+                    {
                         ++j;
                     }
                     myLexicographicOrders[i] = j;
@@ -393,23 +442,29 @@ namespace Facet.Combinatorics {
         /// and cancelling out all of the denominator terms before taking the product of the numerator terms.  
         /// </summary>
         /// <returns>The number of permutations.</returns>
-        private long GetCount() {
+        private long GetCount()
+        {
             int runCount = 1;
-            List<int> divisors = new List<int>();
-            List<int> numerators = new List<int>();
-            for(int i = 1; i < myLexicographicOrders.Length; ++i) {
+            List<int> divisors = new();
+            List<int> numerators = new();
+            for (int i = 1; i < myLexicographicOrders.Length; ++i)
+            {
                 numerators.AddRange(SmallPrimeUtility.Factor(i + 1));
-                if(myLexicographicOrders[i] == myLexicographicOrders[i - 1]) {
+                if (myLexicographicOrders[i] == myLexicographicOrders[i - 1])
+                {
                     ++runCount;
                 }
-                else {
-                    for(int f = 2; f <= runCount; ++f) {
+                else
+                {
+                    for (int f = 2; f <= runCount; ++f)
+                    {
                         divisors.AddRange(SmallPrimeUtility.Factor(f));
                     }
                     runCount = 1;
                 }
             }
-            for(int f = 2; f <= runCount; ++f) {
+            for (int f = 2; f <= runCount; ++f)
+            {
                 divisors.AddRange(SmallPrimeUtility.Factor(f));
             }
             return SmallPrimeUtility.EvaluatePrimeFactors(SmallPrimeUtility.DividePrimeFactors(numerators, divisors));
@@ -430,12 +485,14 @@ namespace Facet.Combinatorics {
         /// comparing T each time, much faster to let the CLR optimize around integers.
         /// </summary>
         private int[] myLexicographicOrders;
-        
+
         /// <summary>
         /// Inner class that wraps an IComparer around a type T when it is IComparable
         /// </summary>
-        private class SelfComparer<U> : IComparer<U> {
-            public int Compare(U x, U y) {
+        private class SelfComparer<U> : IComparer<U>
+        {
+            public int Compare(U x, U y)
+            {
                 return ((IComparable<U>)x).CompareTo(y);
             }
         }

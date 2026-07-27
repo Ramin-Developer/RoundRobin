@@ -3,7 +3,8 @@
 
 using System.Collections.Generic;
 
-namespace ChessTournament.Combinatorics {
+namespace ChessTournament.Combinatorics
+{
     /// <summary>
     /// Combinations defines a meta-collection, typically a list of lists, of all possible 
     /// subsets of a particular size from the set of values.  This list is enumerable and 
@@ -28,13 +29,15 @@ namespace ChessTournament.Combinatorics {
     /// {A A B} {A A B} {A B B} {A B B}
     /// </remarks>
     /// <typeparam name="T">The type of the values within the list.</typeparam>
-    public class Combinations<T> : IMetaCollection<T> {
+    public class Combinations<T> : IMetaCollection<T>
+    {
         #region Constructors
 
         /// <summary>
         /// No default constructor, must provided a list of values and size.
         /// </summary>
-        protected Combinations() {
+        protected Combinations()
+        {
             ;
         }
 
@@ -45,7 +48,8 @@ namespace ChessTournament.Combinatorics {
         /// </summary>
         /// <param name="values">List of values to select combinations from.</param>
         /// <param name="lowerIndex">The size of each combination set to return.</param>
-        public Combinations(IList<T> values, int lowerIndex) {
+        public Combinations(IList<T> values, int lowerIndex)
+        {
             Initialize(values, lowerIndex, GenerateOption.WithoutRepetition);
         }
 
@@ -56,7 +60,8 @@ namespace ChessTournament.Combinatorics {
         /// <param name="values">List of values to select combinations from.</param>
         /// <param name="lowerIndex">The size of each combination set to return.</param>
         /// <param name="type">The type of Combinations set to generate.</param>
-        public Combinations(IList<T> values, int lowerIndex, GenerateOption type) {
+        public Combinations(IList<T> values, int lowerIndex, GenerateOption type)
+        {
             Initialize(values, lowerIndex, type);
         }
 
@@ -68,7 +73,8 @@ namespace ChessTournament.Combinatorics {
         /// Gets an enumerator for collecting the list of combinations.
         /// </summary>
         /// <returns>The enumerator.</returns>
-        public IEnumerator<IList<T>> GetEnumerator() {
+        public IEnumerator<IList<T>> GetEnumerator()
+        {
             return new Enumerator(this);
         }
 
@@ -76,7 +82,8 @@ namespace ChessTournament.Combinatorics {
         /// Gets an enumerator for collecting the list of combinations.
         /// </summary>
         /// <returns>The enumerator.returns>
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
             return new Enumerator(this);
         }
 
@@ -87,15 +94,17 @@ namespace ChessTournament.Combinatorics {
         /// <summary>
         /// The enumerator that enumerates each meta-collection of the enclosing Combinations class.
         /// </summary>
-        public class Enumerator : IEnumerator<IList<T>> {
-            
+        public class Enumerator : IEnumerator<IList<T>>
+        {
+
             #region Constructors
 
             /// <summary>
             /// Construct a enumerator with the parent object.
             /// </summary>
             /// <param name="source">The source combinations object.</param>
-            public Enumerator(Combinations<T> source) {
+            public Enumerator(Combinations<T> source)
+            {
                 myParent = source;
                 myPermutationsEnumerator = (Permutations<bool>.Enumerator)myParent.myPermutations.GetEnumerator();
             }
@@ -106,10 +115,11 @@ namespace ChessTournament.Combinatorics {
             /// <summary>
             /// Resets the combinations enumerator to the first combination.  
             /// </summary>
-            public void Reset() {
+            public void Reset()
+            {
                 myPermutationsEnumerator.Reset();
             }
-            
+
             /// <summary>
             /// Advances to the next combination of items from the set.
             /// </summary>
@@ -118,7 +128,8 @@ namespace ChessTournament.Combinatorics {
             /// The heavy lifting is done by the permutations object, the combination is generated
             /// by creating a new list of those items that have a true in the permutation parrellel array.
             /// </remarks>
-            public bool MoveNext() {
+            public bool MoveNext()
+            {
                 bool ret = myPermutationsEnumerator.MoveNext();
                 myCurrentList = null;
                 return ret;
@@ -127,8 +138,10 @@ namespace ChessTournament.Combinatorics {
             /// <summary>
             /// The current combination
             /// </summary>
-            public IList<T> Current {
-                get {
+            public IList<T> Current
+            {
+                get
+                {
                     ComputeCurrent();
                     return myCurrentList;
                 }
@@ -137,8 +150,10 @@ namespace ChessTournament.Combinatorics {
             /// <summary>
             /// The current combination
             /// </summary>
-            object System.Collections.IEnumerator.Current {
-                get {
+            object System.Collections.IEnumerator.Current
+            {
+                get
+                {
                     ComputeCurrent();
                     return myCurrentList;
                 }
@@ -147,7 +162,8 @@ namespace ChessTournament.Combinatorics {
             /// <summary>
             /// Cleans up non-managed resources, of which there are none used here.
             /// </summary>
-            public void Dispose() {
+            public void Dispose()
+            {
                 ;
             }
 
@@ -181,25 +197,31 @@ namespace ChessTournament.Combinatorics {
             /// Generates set: {A   B B     D D    }
             /// Note: size of permutation is equal to upper index - 1 + lower index.
             /// </remarks>
-            private void ComputeCurrent() {
-                if(myCurrentList == null) {
+            private void ComputeCurrent()
+            {
+                if (myCurrentList == null)
+                {
                     myCurrentList = new List<T>();
                     int index = 0;
                     IList<bool> currentPermutation = (IList<bool>)myPermutationsEnumerator.Current;
-                    for(int i = 0; i < currentPermutation.Count; ++i) {
-                        if(currentPermutation[i] == false) {
+                    for (int i = 0; i < currentPermutation.Count; ++i)
+                    {
+                        if (currentPermutation[i] == false)
+                        {
                             myCurrentList.Add(myParent.myValues[index]);
-                            if(myParent.Type == GenerateOption.WithoutRepetition) {
+                            if (myParent.Type == GenerateOption.WithoutRepetition)
+                            {
                                 ++index;
                             }
                         }
-                        else {
+                        else
+                        {
                             ++index;
                         }
                     }
                 }
             }
-        
+
             #endregion
 
             #region Data
@@ -218,7 +240,7 @@ namespace ChessTournament.Combinatorics {
             /// An enumertor of the parents list of lexicographic orderings.
             /// </summary>
             private Permutations<bool>.Enumerator myPermutationsEnumerator;
-            
+
             #endregion
         }
         #endregion
@@ -230,8 +252,10 @@ namespace ChessTournament.Combinatorics {
         /// This value is mathematically defined as Choose(M, N) where M is the set size
         /// and N is the subset size.  This is M! / (N! * (M-N)!).
         /// </summary>
-        public long Count {
-            get {
+        public long Count
+        {
+            get
+            {
                 return myPermutations.Count;
             }
         }
@@ -239,8 +263,10 @@ namespace ChessTournament.Combinatorics {
         /// <summary>
         /// The type of Combinations set that is generated.
         /// </summary>
-        public GenerateOption Type {
-            get {
+        public GenerateOption Type
+        {
+            get
+            {
                 return myMetaCollectionType;
             }
         }
@@ -248,8 +274,10 @@ namespace ChessTournament.Combinatorics {
         /// <summary>
         /// The upper index of the meta-collection, equal to the number of items in the initial set.
         /// </summary>
-        public int UpperIndex {
-            get {
+        public int UpperIndex
+        {
+            get
+            {
                 return myValues.Count;
             }
         }
@@ -257,8 +285,10 @@ namespace ChessTournament.Combinatorics {
         /// <summary>
         /// The lower index of the meta-collection, equal to the number of items returned each iteration.
         /// </summary>
-        public int LowerIndex {
-            get {
+        public int LowerIndex
+        {
+            get
+            {
                 return myLowerIndex;
             }
         }
@@ -290,27 +320,35 @@ namespace ChessTournament.Combinatorics {
         /// E.g. 8 choose 3 generates:
         /// Map: {1 1 1 1 1 1 1 1 0 0 0} (7 trues, 3 falses).
         /// </remarks>
-        private void Initialize(IList<T> values, int lowerIndex, GenerateOption type) {
+        private void Initialize(IList<T> values, int lowerIndex, GenerateOption type)
+        {
             myMetaCollectionType = type;
             myLowerIndex = lowerIndex;
             myValues = new List<T>();
             myValues.AddRange(values);
-            List<bool> myMap = new List<bool>();
-            if(type == GenerateOption.WithoutRepetition) {
-                for(int i = 0; i < myValues.Count; ++i) {
-                    if(i >= myValues.Count - myLowerIndex) {
+            List<bool> myMap = new();
+            if (type == GenerateOption.WithoutRepetition)
+            {
+                for (int i = 0; i < myValues.Count; ++i)
+                {
+                    if (i >= myValues.Count - myLowerIndex)
+                    {
                         myMap.Add(false);
                     }
-                    else {
+                    else
+                    {
                         myMap.Add(true);
                     }
                 }
             }
-            else {
-                for(int i = 0; i < values.Count - 1; ++i) {
+            else
+            {
+                for (int i = 0; i < values.Count - 1; ++i)
+                {
                     myMap.Add(true);
                 }
-                for(int i = 0; i < myLowerIndex; ++i) {
+                for (int i = 0; i < myLowerIndex; ++i)
+                {
                     myMap.Add(false);
                 }
             }
