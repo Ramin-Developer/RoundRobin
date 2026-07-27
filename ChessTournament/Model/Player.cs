@@ -1,51 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
+namespace ChessTournament.Model;
 
-namespace ChessTournament.Model
+public class Player(int id, int rank)
 {
-	public class Player : IComparer<Player>
-	{
-		/************************************************ Constructor ************************************************/
-		public Player(int id, int rank)
-		{
-			Id = id;
-			Rank = rank;
-			IsBusy = false;
-		}
+    /********************************************** Class Interface **********************************************/
+    public int Compare(Player? x, Player? y) => x!.Id > y!.Id ? 1 : 0;
 
-		/********************************************** Class Interface **********************************************/
-		internal int Id
-		{
-			get { return _id; }
+    internal int Id
+    {
+        get => _id;
 
-			set
-			{
-				if (0 > value || value > 1000000)
-					throw new ArgumentOutOfRangeException(nameof(Id), value, "Value of Player ID is out of range!");
+        set
+        {
+            if (0 > value || value > 1000000)
+                throw new ArgumentOutOfRangeException(nameof(Id), value, "Value of Player ID is out of range!");
 
-				_id = value;
-			}
-		}
+            _id = value;
+        }
+    }
 
-		internal int Rank
-		{
-			get { return _rank; }
+    internal int Rank
+    {
+        get => _rank;
 
-			set
-			{
-				if (0 > value || value > 3000)
-					throw new ArgumentOutOfRangeException(nameof(Rank), value, "Value of Rank is out of range!");
+        set
+        {
+            if (0 > value || value > 3000)
+                throw new ArgumentOutOfRangeException(nameof(Rank), value, "Value of Rank is out of range!");
 
-				_rank = value;
-			}
-		}
+            _rank = value;
+        }
+    }
 
-		internal bool IsBusy { get; set; }
+    internal bool IsBusy { get; set; }
 
-		public int Compare(Player x, Player y) => x.Id > y.Id ? 1 : 0;
+    /*********************************************** Private Fields **********************************************/
+    private int _id = id is >= 0 and <= 1000000
+        ? id
+        : throw new ArgumentOutOfRangeException(nameof(id), id, "Value of Player ID is out of range!");
 
-		/*********************************************** Private Fields **********************************************/
-		private int _id;
-		private int _rank;
-	}
+    private int _rank = rank is >= 0 and <= 3000
+        ? rank
+        : throw new ArgumentOutOfRangeException(nameof(rank), rank, "Value of Rank is out of range!");
 }

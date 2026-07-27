@@ -1,0 +1,17 @@
+# .NET 10 Upgrade Progress
+
+## Overview
+
+Upgrading ChessTournament.sln (3 projects) to net10.0 using a Bottom-Up strategy, then adopting C# 14 language features and converting the solution to `.slnx` format.
+
+**Progress**: 7/7 tasks complete <progress value="100" max="100"></progress> 100%
+
+## Tasks
+
+- ✅ 01-prerequisites: Verify SDK and toolchain readiness ([Content](tasks/01-prerequisites/task.md), [Progress](tasks/01-prerequisites/progress-details.md))
+- ✅ 02-sdk-style-conversion: Convert legacy csproj to SDK-style ([Content](tasks/02-sdk-style-conversion/task.md), [Progress](tasks/02-sdk-style-conversion/progress-details.md))
+- ✅ 03-foundation-upgrade: Upgrade foundation projects to net10.0 ([Content](tasks/03-foundation-upgrade/task.md), [Progress](tasks/03-foundation-upgrade/progress-details.md))
+- ✅ 04-test-project-upgrade: Upgrade test project to net10.0 ([Content](tasks/04-test-project-upgrade/task.md), [Progress](tasks/04-test-project-upgrade/progress-details.md))
+- ✅ 05-csharp14-modernization: Adopt C# 14 language features ([Content](tasks/05-csharp14-modernization/task.md), [Progress](tasks/05-csharp14-modernization/progress-details.md))
+- ✅ 06-slnx-conversion: Convert solution to .slnx ([Content](tasks/06-slnx-conversion/task.md), [Progress](tasks/06-slnx-conversion/progress-details.md))
+- ✅ 07-final-validation: Full solution validation and cleanup ([Content](tasks/07-final-validation/task.md), [Progress](tasks/07-final-validation/progress-details.md))

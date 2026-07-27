@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ChessTournament/ChessTournament.csproj" />
+  <Project Path="ChessTournament.Test/ChessTournament.Test.csproj" />
+  <Project Path="FSharpTest/FSharpTest.fsproj" />
+</Solution>
