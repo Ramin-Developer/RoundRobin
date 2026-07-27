@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <!-- Cover only the production app assembly. -->
+          <Include>[ChessTournament]*</Include>
+          <!-- Exclude the vendored third-party library and the console entry point. -->
+          <Exclude>[ChessTournament]ChessTournament.Combinatorics.*,[ChessTournament]ChessTournament.Program</Exclude>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

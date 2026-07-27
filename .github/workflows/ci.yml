@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main, master, upgrade-dotnet-10 ]
+    branches: [ main, master, refactor-tests-xunit ]
   pull_request:
     branches: [ main, master ]
 
@@ -31,4 +31,15 @@ jobs:
         run: dotnet build ChessTournament.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ChessTournament.slnx --configuration Release --no-build --verbosity normal
+        run: dotnet test ChessTournament.slnx --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings coverage.runsettings --results-directory TestResults
+
+      - name: Enforce coverage threshold
+        shell: bash
+        run: |
+          threshold=80
+          file=$(find TestResults -name 'coverage.cobertura.xml' | head -n1)
+          if [ -z "$file" ]; then echo "No coverage report found"; exit 1; fi
+          rate=$(grep -o 'line-rate="[0-9.]*"' "$file" | head -n1 | sed -E 's/line-rate="([0-9.]*)"/\1/')
+          pct=$(awk "BEGIN { printf \"%.2f\", $rate * 100 }")
+          echo "Line coverage: ${pct}% (threshold ${threshold}%)"
+          awk "BEGIN { exit !($rate * 100 >= $threshold) }" || { echo "::error::Coverage ${pct}% is below the ${threshold}% threshold"; exit 1; }
