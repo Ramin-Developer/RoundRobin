@@ -145,7 +145,7 @@ public class Variations<T> : IMetaCollection<T>
             int carry = 1;
             if (myListIndexes == null)
             {
-                myListIndexes = new List<int>();
+                myListIndexes = [];
                 for (int i = 0; i < myParent.LowerIndex; ++i)
                 {
                     myListIndexes.Add(0);
@@ -212,7 +212,7 @@ public class Variations<T> : IMetaCollection<T>
         {
             if (myCurrentList == null)
             {
-                myCurrentList = new List<T>();
+                myCurrentList = [];
                 foreach (int index in myListIndexes)
                 {
                     myCurrentList.Add(myParent.myValues[index]);
@@ -227,7 +227,7 @@ public class Variations<T> : IMetaCollection<T>
         /// <summary>
         /// Parent object this is an enumerator for.
         /// </summary>
-        private Variations<T> myParent;
+        private readonly Variations<T> myParent;
 
         /// <summary>
         /// The current list of values, this is lazy evaluated by the Current property.
@@ -338,7 +338,7 @@ public class Variations<T> : IMetaCollection<T>
         {
             if (myCurrentList == null)
             {
-                myCurrentList = new List<T>();
+                myCurrentList = [];
                 int index = 0;
                 IList<int> currentPermutation = (IList<int>)myPermutationsEnumerator.Current;
                 for (int i = 0; i < myParent.LowerIndex; ++i)
@@ -371,7 +371,7 @@ public class Variations<T> : IMetaCollection<T>
         /// <summary>
         /// Parent object this is an enumerator for.
         /// </summary>
-        private Variations<T> myParent;
+        private readonly Variations<T> myParent;
 
         /// <summary>
         /// The current list of values, this is lazy evaluated by the Current property.
@@ -381,7 +381,7 @@ public class Variations<T> : IMetaCollection<T>
         /// <summary>
         /// An enumertor of the parents list of lexicographic orderings.
         /// </summary>
-        private Permutations<int>.Enumerator myPermutationsEnumerator;
+        private readonly Permutations<int>.Enumerator myPermutationsEnumerator;
 
         #endregion
     }
@@ -458,11 +458,10 @@ public class Variations<T> : IMetaCollection<T>
     {
         myMetaCollectionType = type;
         myLowerIndex = lowerIndex;
-        myValues = new List<T>();
-        myValues.AddRange(values);
+        myValues = [.. values];
         if (type == GenerateOption.WithoutRepetition)
         {
-            List<int> myMap = new();
+            List<int> myMap = [];
             int index = 0;
             for (int i = 0; i < myValues.Count; ++i)
             {

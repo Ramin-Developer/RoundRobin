@@ -31,8 +31,8 @@ public class Admin(Interfaces.IProblemDesc problemDesc)
 
     public void Simulate()
     {
-        TriedRounds = EstimateElapsedTime().ToList();
-        Rounds = GetCompletedRounds.ToList();
+        TriedRounds = [.. EstimateElapsedTime()];
+        Rounds = [.. GetCompletedRounds];
         IsDesiredNoOfRoundsMet = Rounds.Count == NoOfRoundsDesired;
 
         NoOfActualRounds = Rounds.Count;

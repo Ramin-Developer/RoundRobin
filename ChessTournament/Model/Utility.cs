@@ -42,7 +42,7 @@ public class Utility
             if (p2!.Id == StartPlayerId && innerList.Count == noOfPlayers)
             {
                 result.Add(innerList);
-                innerList = new HashSet<Match> { match };
+                innerList = [match];
                 continue;
             }
 
@@ -91,7 +91,7 @@ public class Utility
             if (!isFound)
                 continue;
 
-            result = result.Union(localList).ToList();
+            result = [.. result.Union(localList)];
         }
 
         return result;
@@ -124,5 +124,5 @@ public class Utility
     private static bool AreListsEqual(IEnumerable<Player> fstList, IEnumerable<Player> sndList)
     { return fstList.All(fstItem => sndList.Any(sndItem => sndItem.Id == fstItem.Id)); }
 
-    private static IList<int> GetAllPlayerIds(IEnumerable<Player> players) => players.Select(item => item.Id).ToList();
+    private static IList<int> GetAllPlayerIds(IEnumerable<Player> players) => [.. players.Select(item => item.Id)];
 }

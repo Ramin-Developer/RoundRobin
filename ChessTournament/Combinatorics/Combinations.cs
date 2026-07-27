@@ -200,7 +200,7 @@ public class Combinations<T> : IMetaCollection<T>
         {
             if (myCurrentList == null)
             {
-                myCurrentList = new List<T>();
+                myCurrentList = [];
                 int index = 0;
                 IList<bool> currentPermutation = (IList<bool>)myPermutationsEnumerator.Current;
                 for (int i = 0; i < currentPermutation.Count; ++i)
@@ -228,7 +228,7 @@ public class Combinations<T> : IMetaCollection<T>
         /// <summary>
         /// Parent object this is an enumerator for.
         /// </summary>
-        private Combinations<T> myParent;
+        private readonly Combinations<T> myParent;
 
         /// <summary>
         /// The current list of values, this is lazy evaluated by the Current property.
@@ -238,7 +238,7 @@ public class Combinations<T> : IMetaCollection<T>
         /// <summary>
         /// An enumertor of the parents list of lexicographic orderings.
         /// </summary>
-        private Permutations<bool>.Enumerator myPermutationsEnumerator;
+        private readonly Permutations<bool>.Enumerator myPermutationsEnumerator;
 
         #endregion
     }
@@ -323,9 +323,8 @@ public class Combinations<T> : IMetaCollection<T>
     {
         myMetaCollectionType = type;
         myLowerIndex = lowerIndex;
-        myValues = new List<T>();
-        myValues.AddRange(values);
-        List<bool> myMap = new();
+        myValues = [.. values];
+        List<bool> myMap = [];
         if (type == GenerateOption.WithoutRepetition)
         {
             for (int i = 0; i < myValues.Count; ++i)

@@ -34,7 +34,7 @@ public class SmallPrimeUtility
     {
         int primeIndex = 0;
         int prime = PrimeTable[primeIndex];
-        List<int> factors = new();
+        List<int> factors = [];
         while (i > 1)
         {
             if (i % prime == 0)
@@ -61,15 +61,7 @@ public class SmallPrimeUtility
     /// <returns>Product, expressed as list of prime factors.</returns>
     public static List<int> MultiplyPrimeFactors(IList<int> lhs, IList<int> rhs)
     {
-        List<int> product = new();
-        foreach (int prime in lhs)
-        {
-            product.Add(prime);
-        }
-        foreach (int prime in rhs)
-        {
-            product.Add(prime);
-        }
+        List<int> product = [.. lhs, .. rhs];
         product.Sort();
         return product;
     }
@@ -87,11 +79,7 @@ public class SmallPrimeUtility
     /// <returns>Resultant, expressed as list of prime factors.</returns>
     public static List<int> DividePrimeFactors(IList<int> numerator, IList<int> denominator)
     {
-        List<int> product = new();
-        foreach (int prime in numerator)
-        {
-            product.Add(prime);
-        }
+        List<int> product = [.. numerator];
         foreach (int prime in denominator)
         {
             product.Remove(prime);
@@ -144,7 +132,7 @@ public class SmallPrimeUtility
             }
         }
         // Scan sieve for primes...
-        myPrimes = new List<int>();
+        myPrimes = [];
         for (int i = 2; i < 65536; ++i)
         {
             if (sieve[i] == true)
@@ -166,6 +154,6 @@ public class SmallPrimeUtility
         }
     }
 
-    private static List<int> myPrimes = new();
+    private static List<int> myPrimes = [];
 
 }

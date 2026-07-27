@@ -149,8 +149,7 @@ public class Permutations<T> : IMetaCollection<T>
         {
             if (myPosition == Position.BeforeFirst)
             {
-                myValues = new List<T>(myParent.myValues.Count);
-                myValues.AddRange(myParent.myValues);
+                myValues = [.. myParent.myValues];
                 Array.Sort(myLexicographicalOrders);
                 myPosition = Position.InSet;
             }
@@ -195,7 +194,7 @@ public class Permutations<T> : IMetaCollection<T>
             {
                 if (myPosition == Position.InSet)
                 {
-                    return new List<T>(myValues);
+                    return [.. myValues];
                 }
                 else
                 {
@@ -293,7 +292,7 @@ public class Permutations<T> : IMetaCollection<T>
         /// This is generated at Initialization and is used as a performance speed up rather that
         /// comparing T each time, much faster to let the CLR optimize around integers.
         /// </summary>
-        private int[] myLexicographicalOrders;
+        private readonly int[] myLexicographicalOrders;
 
         /// <summary>
         /// The list of values that are current to the enumerator.
@@ -303,7 +302,7 @@ public class Permutations<T> : IMetaCollection<T>
         /// <summary>
         /// The set of permuations that this enumerator enumerates.
         /// </summary>
-        private Permutations<T> myParent;
+        private readonly Permutations<T> myParent;
 
         /// <summary>
         /// Internal position type for tracking enumertor position.
@@ -400,8 +399,7 @@ public class Permutations<T> : IMetaCollection<T>
     private void Initialize(IList<T> values, GenerateOption type, IComparer<T> comparer)
     {
         myMetaCollectionType = type;
-        myValues = new List<T>(values.Count);
-        myValues.AddRange(values);
+        myValues = [.. values];
         myLexicographicOrders = new int[values.Count];
         if (type == GenerateOption.WithRepetition)
         {
@@ -412,10 +410,7 @@ public class Permutations<T> : IMetaCollection<T>
         }
         else
         {
-            if (comparer == null)
-            {
-                comparer = new SelfComparer<T>();
-            }
+            comparer ??= new SelfComparer<T>();
             myValues.Sort(comparer);
             int j = 1;
             if (myLexicographicOrders.Length > 0)
@@ -444,8 +439,8 @@ public class Permutations<T> : IMetaCollection<T>
     private long GetCount()
     {
         int runCount = 1;
-        List<int> divisors = new();
-        List<int> numerators = new();
+        List<int> divisors = [];
+        List<int> numerators = [];
         for (int i = 1; i < myLexicographicOrders.Length; ++i)
         {
             numerators.AddRange(SmallPrimeUtility.Factor(i + 1));

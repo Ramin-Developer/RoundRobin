@@ -15,7 +15,7 @@ public class Round(Interfaces.IProblemDesc problemDesc)
 
     internal void Setup()
     {
-        RoundMatches = SetupRound().ToList();
+        RoundMatches = [.. SetupRound()];
         if (RoundMatches.Count == NoOfMatchesPerRound)
         { Cost = RoundCost; }
     }
@@ -27,7 +27,7 @@ public class Round(Interfaces.IProblemDesc problemDesc)
 
     private List<Match> RoundMatches { get; set; } = [];
 
-    private List<Player> Players { get; } = problemDesc.Players.ToList();
+    private List<Player> Players { get; } = [.. problemDesc.Players];
 
     private IEnumerable<HashSet<Match>> AllMatches { get; } = problemDesc.AllMatches;
 
