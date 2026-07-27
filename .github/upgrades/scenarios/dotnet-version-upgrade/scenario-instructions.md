@@ -35,3 +35,6 @@
 - Validate build after each project's upgrade before proceeding to the next tier.
 - Defer CPM: add a final cleanup recommendation once all projects are SDK-style on net10.0.
 - Cross-cutting tasks (C# 14 modernization, .sln → .slnx) run after all projects build on net10.0.
+
+## Reminders & Deferred Items
+- 2025-06-14 — Pre-existing defective test `AdminTests.Should_generate_correct_rounds(4)`: helper `GetExpectedSolutions` never populates `result`, so it always fails. Unrelated to the upgrade. Fix or remove during final validation.
