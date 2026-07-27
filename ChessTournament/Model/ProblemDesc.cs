@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ChessTournament.Interfaces;
-
-namespace ChessTournament.Model
+﻿namespace ChessTournament.Model
 {
     public class ProblemDesc : IProblemDesc
     {

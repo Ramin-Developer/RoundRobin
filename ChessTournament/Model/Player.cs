@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ChessTournament.Model
+﻿namespace ChessTournament.Model
 {
-    public class Player : IComparer<Player>
+    public class Player
     {
         /************************************************ Constructor ************************************************/
         public Player(int id, int rank)

@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ChessTournament.Combinatorics;
-
-namespace ChessTournament.Model
+﻿namespace ChessTournament.Model
 {
     public class Utility
     {

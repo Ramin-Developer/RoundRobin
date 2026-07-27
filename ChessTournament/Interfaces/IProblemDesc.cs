@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using ChessTournament.Model;
-
-namespace ChessTournament.Interfaces
+﻿namespace ChessTournament.Interfaces
 {
     public interface IProblemDesc
     {

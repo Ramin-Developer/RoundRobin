@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using ChessTournament.Enums;
-
-namespace ChessTournament.Model
+﻿namespace ChessTournament.Model
 {
     public class Admin
     {

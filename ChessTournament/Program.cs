@@ -1,7 +1,4 @@
-﻿using System;
-using ChessTournament.Model;
-
-namespace ChessTournament
+﻿namespace ChessTournament
 {
     public class Program
     {

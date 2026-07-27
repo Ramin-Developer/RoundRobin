@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ChessTournament.Model;
-using NUnit.Framework;
-
-namespace ChesTournament.Test
+﻿namespace ChesTournament.Test
 {
     [TestFixture]
     public class AdminTests
