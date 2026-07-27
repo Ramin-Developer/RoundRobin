@@ -1,9 +1,7 @@
-﻿
-namespace ChessTournament.Enums
+namespace ChessTournament.Enums;
+
+public enum OutputMedium
 {
-    public enum OutputMedium
-    {
-        Screen,
-        File
-    }
+    Screen,
+    File
 }
