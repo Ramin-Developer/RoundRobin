@@ -28,7 +28,7 @@ namespace ChessTournament.Model
             NoOfPossibleMatches = NoOfPlayers * (NoOfPlayers - 1) / 2;
             OutputFile = $"Results - {NoOfPlayers} Players.txt";
 
-            Players = Utility.InitializePlayers(NoOfPlayers) as HashSet<Player>;
+            Players = (Utility.InitializePlayers(NoOfPlayers) as HashSet<Player>)!;
             AllMatches = Utility.InitializeAllMatches(Players);
         }
 

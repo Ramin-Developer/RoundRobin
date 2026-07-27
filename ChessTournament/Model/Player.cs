@@ -42,7 +42,7 @@ namespace ChessTournament.Model
 
         internal bool IsBusy { get; set; }
 
-        public int Compare(Player x, Player y) => x.Id > y.Id ? 1 : 0;
+        public int Compare(Player? x, Player? y) => x!.Id > y!.Id ? 1 : 0;
 
         /*********************************************** Private Fields **********************************************/
         private int _id;

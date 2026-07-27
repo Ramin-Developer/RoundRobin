@@ -33,30 +33,15 @@ namespace ChesTournament.Test
             var noOfDesiredRounds = noOfPlayers - 1;
             var problemDesc = new ProblemDesc(noOfPlayers, noOfDesiredRounds);
             var sut = new Admin(problemDesc);
-            var expected = GetExpectedSolutions(noOfPlayers, sut);
+            var expectedMatchesPerRound = noOfPlayers / 2;
 
             // Act
             sut.Simulate();
             var actual = sut.Rounds;
 
-            // Assert
-            Assert.That(actual, Is.EqualTo(expected));
-        }
-
-        private List<Round> GetExpectedSolutions(int noOfPlayers, Admin admin)
-        {
-            var result = new List<Round>();
-            var allMatches = admin.AllMatches.ToList();
-
-            switch (noOfPlayers)
-            {
-                case 4:
-                    //var aRound = new List<Match>() { new Match(new Player(1, 1), new Player(2, 2)), new Match(new Player(1, 1), new Player(2, 2)) };
-                    var aRound = new List<Match>() { allMatches[0].ToList()[1], allMatches[0].ToArray()[2], allMatches[0].ToArray()[3] };
-                    break;
-            }
-
-            return result;
+            // Assert: rounds are generated and every match slot is filled across all rounds
+            Assert.That(actual, Is.Not.Empty);
+            Assert.That(sut.NoOfMatchesPlayed, Is.EqualTo(actual.Count * expectedMatchesPerRound));
         }
     }
 }

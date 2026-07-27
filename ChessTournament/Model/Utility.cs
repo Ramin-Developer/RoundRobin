@@ -12,7 +12,7 @@ namespace ChessTournament.Model
 
         internal const int StartPlayerId = 1;
 
-        internal static Player FindPlayerById(int id, IEnumerable<Player> players) => players.FirstOrDefault(p => p.Id == id);
+        internal static Player? FindPlayerById(int id, IEnumerable<Player> players) => players.FirstOrDefault(p => p.Id == id);
 
         internal static IEnumerable<Player> InitializePlayers(int noOfPlayers)
         {
@@ -43,8 +43,8 @@ namespace ChessTournament.Model
             {
                 var p1 = FindPlayerById(item[0], pList);
                 var p2 = FindPlayerById(item[1], pList);
-                var match = new Match(p1, p2);
-                if (p2.Id == StartPlayerId && innerList.Count == noOfPlayers)
+                var match = new Match(p1!, p2!);
+                if (p2!.Id == StartPlayerId && innerList.Count == noOfPlayers)
                 {
                     result.Add(innerList);
                     innerList = new HashSet<Match> { match };

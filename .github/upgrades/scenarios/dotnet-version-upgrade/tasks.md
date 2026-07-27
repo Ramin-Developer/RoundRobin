@@ -4,7 +4,7 @@
 
 Upgrading ChessTournament.sln (3 projects) to net10.0 using a Bottom-Up strategy, then adopting C# 14 language features and converting the solution to `.slnx` format.
 
-**Progress**: 6/7 tasks complete <progress value="86" max="100"></progress> 86%
+**Progress**: 7/7 tasks complete <progress value="100" max="100"></progress> 100%
 
 ## Tasks
 
@@ -14,4 +14,4 @@ Upgrading ChessTournament.sln (3 projects) to net10.0 using a Bottom-Up strategy
 - ✅ 04-test-project-upgrade: Upgrade test project to net10.0 ([Content](tasks/04-test-project-upgrade/task.md), [Progress](tasks/04-test-project-upgrade/progress-details.md))
 - ✅ 05-csharp14-modernization: Adopt C# 14 language features ([Content](tasks/05-csharp14-modernization/task.md), [Progress](tasks/05-csharp14-modernization/progress-details.md))
 - ✅ 06-slnx-conversion: Convert solution to .slnx ([Content](tasks/06-slnx-conversion/task.md), [Progress](tasks/06-slnx-conversion/progress-details.md))
-- 🔲 07-final-validation: Full solution validation and cleanup
+- ✅ 07-final-validation: Full solution validation and cleanup ([Content](tasks/07-final-validation/task.md), [Progress](tasks/07-final-validation/progress-details.md))

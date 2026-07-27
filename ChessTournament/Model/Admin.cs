@@ -38,9 +38,9 @@ namespace ChessTournament.Model
 
         internal string OutputFile { get; }
 
-        internal string ScreenSummary { get; set; }
+        internal string ScreenSummary { get; set; } = string.Empty;
 
-        public List<Round> Rounds { get; set; }
+        public List<Round> Rounds { get; set; } = [];
 
         public bool IsDesiredNoOfRoundsMet { get; set; }
 
@@ -106,7 +106,7 @@ namespace ChessTournament.Model
             var result = new HashSet<Player>();
             var playerMatches = Utility.FindAllMatchesFor(player, AllMatches, Players).ToList();
             if (playerMatches.Count == 0)
-                return null;
+                return result;
 
             foreach (var match in playerMatches.Where(match => !match.IsPlayed))
             { result.Add(match.SndPlayer); }
@@ -172,7 +172,7 @@ namespace ChessTournament.Model
 
         public IEnumerable<HashSet<Match>> AllMatches { get; }
 
-        private List<Round> TriedRounds { get; set; }
+        private List<Round> TriedRounds { get; set; } = [];
 
         private HashSet<Player> Players { get; }
 

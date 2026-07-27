@@ -27,6 +27,8 @@ namespace ChessTournament.Model
 
         internal bool IsEmpty => RoundMatches.Count == 0;
 
+        private List<Match> RoundMatches { get; set; } = [];
+
         internal void Setup()
         {
             RoundMatches = SetupRound().ToList();
@@ -73,30 +75,27 @@ namespace ChessTournament.Model
         }
 
         private void UpdateDualMatches(IEnumerable<Match> matches)
-        { matches.ToList().ForEach(item => Utility.UpdateMatch(FindDualMatch(item), true)); }
+        { matches.ToList().ForEach(item => Utility.UpdateMatch(FindDualMatch(item)!, true)); }
 
-        private Match FindDualMatch(Match match)
+        private Match? FindDualMatch(Match match)
         {
             var matches = Utility.FindAllMatchesFor(match.SndPlayer, AllMatches, Players);
             return matches.FirstOrDefault(item => item.SndPlayerId == match.FstPLayerId);
         }
 
-        private Match ChooseMatch(int? startSndId)
+        private Match? ChooseMatch(int? startSndId)
         {
             var fstPlayer = FindFreePlayer();
-            var playerMatches = Utility.FindAllMatchesFor(fstPlayer, AllMatches, Players);
-
             if (fstPlayer == null)
                 return null;
 
-            if (startSndId == null)
-                startSndId = fstPlayer.Id + IdStep;
+            var playerMatches = Utility.FindAllMatchesFor(fstPlayer, AllMatches, Players);
+
+            startSndId ??= fstPlayer.Id + IdStep;
 
             return playerMatches.FirstOrDefault(match =>
                 !(match.SndPlayerId < startSndId) && !match.SndPlayer.IsBusy && !match.IsPlayed);
         }
-
-        private List<Match> RoundMatches { get; set; }
 
         private string Display()
         {
@@ -107,7 +106,7 @@ namespace ChessTournament.Model
             return sb.ToString();
         }
 
-        private Player FindFreePlayer() => Players.FirstOrDefault(player => !player.IsBusy);
+        private Player? FindFreePlayer() => Players.FirstOrDefault(player => !player.IsBusy);
 
         private const int IdStep = Utility.IdStep;
     }
