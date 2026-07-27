@@ -1,0 +1,316 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-07-27T13:18:52.273865Z",
+  "analysisEndTime": "2026-07-27T13:18:52.5001996Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 3,
+      "issues": 4,
+      "incidents": 7,
+      "effort": 7
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 6,
+        "Optional": 0,
+        "Potential": 1,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 1,
+        "Project": 5,
+        "Binding": 1
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "ChessTournament\\ChessTournament.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 3,
+      "properties": {
+        "appName": "ChessTournament",
+        "projectKind": "ClassicDotNetApp",
+        "frameworks": [
+          "net48"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": false,
+        "numberOfFiles": 16,
+        "numberOfCodeFiles": 16,
+        "linesTotal": 2162,
+        "linesOfCode": 2162,
+        "totalApiScanned": 1084,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "c4b26553-fc88-42ce-8610-b8480ebf5653",
+          "ruleId": "NuGet.0003",
+          "projectPath": "ChessTournament\\ChessTournament.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.ValueTuple, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+              "protected": "System.ValueTuple, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+            },
+            "kind": "File",
+            "path": "ChessTournament\\ChessTournament.csproj",
+            "snippet": "System.ValueTuple, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "protectedSnippet": "System.ValueTuple, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "label": "System.ValueTuple 4.5.0",
+            "properties": {
+              "PackageId": "System.ValueTuple",
+              "PackageVersion": "4.5.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "ccd45103-e6d8-4db7-b4d2-5625b3d23b86",
+          "ruleId": "Project.0001",
+          "projectPath": "ChessTournament\\ChessTournament.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "ChessTournament\\ChessTournament.csproj"
+          }
+        },
+        {
+          "incidentId": "07b2731e-4a2a-4342-b2c1-4db003fbd221",
+          "ruleId": "Project.0002",
+          "projectPath": "ChessTournament\\ChessTournament.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: .NETFramework,Version=v4.8\nRecommended target framework: net10.0",
+              "protected": "Current target framework: .NETFramework,Version=v4.8\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "ChessTournament\\ChessTournament.csproj",
+            "snippet": "Current target framework: .NETFramework,Version=v4.8\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: .NETFramework,Version=v4.8\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": ".NETFramework,Version=v4.8",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "ChesTournament.Test\\ChessTournament.Test.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 3,
+      "properties": {
+        "appName": "ChessTournament.Test",
+        "projectKind": "ClassicClassLibrary",
+        "frameworks": [
+          "net48"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": false,
+        "numberOfFiles": 2,
+        "numberOfCodeFiles": 2,
+        "linesTotal": 98,
+        "linesOfCode": 98,
+        "totalApiScanned": 82,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "2fdb05ef-a659-4c5e-afe2-1cff246dab1e",
+          "ruleId": "Project.0001",
+          "projectPath": "ChesTournament.Test\\ChessTournament.Test.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "ChesTournament.Test\\ChessTournament.Test.csproj"
+          }
+        },
+        {
+          "incidentId": "59652a54-ccb8-48a3-8595-cb00fded97f3",
+          "ruleId": "Project.0002",
+          "projectPath": "ChesTournament.Test\\ChessTournament.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: .NETFramework,Version=v4.8\nRecommended target framework: net10.0",
+              "protected": "Current target framework: .NETFramework,Version=v4.8\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "ChesTournament.Test\\ChessTournament.Test.csproj",
+            "snippet": "Current target framework: .NETFramework,Version=v4.8\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: .NETFramework,Version=v4.8\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": ".NETFramework,Version=v4.8",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "402cadcd-9e0f-4d75-b622-8bbf083be9b6",
+          "ruleId": "Binding.0003",
+          "projectPath": "ChesTournament.Test\\ChessTournament.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "OutputType=Library with test framework references, GenerateBindingRedirectsOutputType not set",
+              "protected": "OutputType=Library with test framework references, GenerateBindingRedirectsOutputType not set"
+            },
+            "kind": "File",
+            "path": "ChesTournament.Test\\ChessTournament.Test.csproj",
+            "snippet": "OutputType=Library with test framework references, GenerateBindingRedirectsOutputType not set",
+            "protectedSnippet": "OutputType=Library with test framework references, GenerateBindingRedirectsOutputType not set"
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "FSharpTest\\FSharpTest.fsproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "FSharpTest",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "netcoreapp3.0"
+        ],
+        "languages": [
+          ""
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 1,
+        "numberOfCodeFiles": 1,
+        "linesTotal": 8,
+        "linesOfCode": 8,
+        "totalApiScanned": 0,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "671068bb-882e-4cb7-806d-4a9a5a11215e",
+          "ruleId": "Project.0002",
+          "projectPath": "FSharpTest\\FSharpTest.fsproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: netcoreapp3.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: netcoreapp3.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "FSharpTest\\FSharpTest.fsproj",
+            "snippet": "Current target framework: netcoreapp3.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: netcoreapp3.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "netcoreapp3.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0003": {
+      "id": "NuGet.0003",
+      "isFeature": false,
+      "description": "NuGet package functionality is included with framework reference.\n\nPackage needs to be removed.",
+      "label": "NuGet package functionality is included with framework reference",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262609",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0001": {
+      "id": "Project.0001",
+      "isFeature": false,
+      "description": "Project file needs to be converted to SDK-style. Modern .NET framework projects require a change in the project file format and use SDK corresponding to project flavor and functionality.",
+      "label": "Project file needs to be converted to SDK-style",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Binding.0003": {
+      "id": "Binding.0003",
+      "isFeature": false,
+      "description": "Project outputs a library but may host entry points (e.g., unit tests, plugins). GenerateBindingRedirectsOutputType is not set. MSBuild only generates config files for Exe output types by default \u2014 without this flag, the test runner or plugin host will look for a config file that does not exist, causing hard-to-debug failures.",
+      "label": "Library-hosted entry point missing GenerateBindingRedirectsOutputType",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Assembly binding redirection",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262689",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}
