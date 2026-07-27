@@ -32,7 +32,7 @@ public class ProblemDesc : IProblemDesc
     // IProblemDesc Implementation
     public int NoOfPlayers
     {
-        get { return _noOfPlayers; }
+        get => _noOfPlayers;
         set
         {
             if (MinNoOfPlayers > value || value > MaxNoOfPlayers || value % 2 != 0)
@@ -45,7 +45,7 @@ public class ProblemDesc : IProblemDesc
     public int MaxNoOfRounds { get; set; }
     public int NoOfRoundsDesired
     {
-        get { return _noOfRoundsDesired; }
+        get => _noOfRoundsDesired;
         set
         {
             if (MinNoOfRounds > value || value > MaxNoOfRounds)

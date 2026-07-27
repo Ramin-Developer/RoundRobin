@@ -10,8 +10,7 @@ public class Program
             while (true)
             {
                 Console.Write("Enter No. of Players:\t");
-                int noOfPlayers;
-                var isValidInt = int.TryParse(Console.ReadLine(), out noOfPlayers);
+                var isValidInt = int.TryParse(Console.ReadLine(), out var noOfPlayers);
                 if (!isValidInt)
                     return;
 
