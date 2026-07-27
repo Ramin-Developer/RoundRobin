@@ -24,7 +24,7 @@ public class ProblemDesc : IProblemDesc
         NoOfPossibleMatches = NoOfPlayers * (NoOfPlayers - 1) / 2;
         OutputFile = $"Results - {NoOfPlayers} Players.txt";
 
-        Players = (Utility.InitializePlayers(NoOfPlayers) as HashSet<Player>)!;
+        Players = Utility.InitializePlayers(NoOfPlayers);
         AllMatches = Utility.InitializeAllMatches(Players);
     }
 

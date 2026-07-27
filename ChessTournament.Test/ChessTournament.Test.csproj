@@ -1,11 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <LangVersion>14.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>ChesTournament.Test</RootNamespace>
-    <AssemblyName>ChesTournament.Test</AssemblyName>
+    <RootNamespace>ChessTournament.Test</RootNamespace>
+    <AssemblyName>ChessTournament.Test</AssemblyName>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ public class Utility
 
     internal static Player? FindPlayerById(int id, IEnumerable<Player> players) => players.FirstOrDefault(p => p.Id == id);
 
-    internal static IEnumerable<Player> InitializePlayers(int noOfPlayers)
+    internal static HashSet<Player> InitializePlayers(int noOfPlayers)
     {
         var result = new HashSet<Player>();
         for (var i = 0; i < noOfPlayers; i++)

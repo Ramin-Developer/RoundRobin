@@ -1,4 +1,4 @@
-namespace ChesTournament.Test;
+namespace ChessTournament.Test;
 
 [TestFixture]
 public class AdminTests
