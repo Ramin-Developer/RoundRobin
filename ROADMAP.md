@@ -14,6 +14,9 @@ Tracking observations and follow-up work identified during the .NET 10 / C# 14 m
 - Consider adding code coverage collection (e.g., `--collect:"XPlat Code Coverage"`) to the CI test step.
 - Consider raising analyzer severity gradually (e.g., enable `AnalysisMode` in `Directory.Build.props`)
   once the CA hints above are addressed.
+- Bump CI actions `actions/checkout` and `actions/setup-dotnet` from `@v4` to `@v5`. The `@v4`
+  versions run on the deprecated Node 20 runtime (currently force-run on Node 24); the workflow
+  emits a deprecation warning until upgraded.
 
 ## Testing
 - Test count expanded 12 → 30. Consider adding coverage for edge cases in
