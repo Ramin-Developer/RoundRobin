@@ -23,7 +23,7 @@ public class UtilityMatchTests
 
         var matches = Utility.FindAllMatchesFor(players[0], allMatches, players);
 
-        Assert.Equal(allMatches[0], matches);
+        Assert.Same(allMatches[0], matches);
     }
 
     [Fact]
